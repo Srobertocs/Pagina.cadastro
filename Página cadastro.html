@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre - ScriptWeb</title>
+    <link rel="stylesheet" type="text/css" href="página cadastro-style.css">
+</head>
+<body>
+    <main class="conteudo">
+        <div class="container">    
+            <div class="form">
+                <form action="#">
+                    <div class="form-header">
+                        <div class="titulo">
+                            <h2 class="titulo">Cadastro do usuário</h2>
+                        </div>
+                    </div>
+                    <div class="grupo-input">
+                        <div class="input-box">
+                            <label for="nome">Nome</label>
+                            <input id="nome" type="text" name="nome" placeholder="Digite seu nome" required>            
+                        </div>
+
+                        <div class="input-box">
+                            <label for="cpf">CPF</label>
+                            <input id="cpf" type="text" name="cpf" placeholder="Digite seu Cpf" required>            
+                        </div>
+
+                        <div class="input-box">
+                            <label for="end">Endereço</label>
+                            <input id="end" type="text" name="end" placeholder="Digite seu endereço" required>            
+                        </div>
+
+                        <div class="input-box">
+                            <label for="date">Data de nascimento</label>
+                            <input id="date" type="date" name="date" placeholder="Digite sua data de nascimento" required>            
+                        </div>
+
+                        <div class="input-box">
+                            <label for="rend_mensal">Renda mensal</label>
+                            <input id="rend_mensal" type="text" name="rend_mensal" placeholder="Digite sua renda mensal" required>            
+                        </div>
+                        <div class="input-box">
+                            <label for="prof">Profissão</label>
+                            <input id="prof" type="text" name="prof" placeholder="Digite sua profissão" required>            
+                        </div>
+                    </div>
+
+                    <div class="button">
+                        <button class="Cadastre_button" onclick="cad_nome(),cad_end(),cad_dataNasc(),cad_renda(),vetor_dados(),cad_cpf()"><a href="#">Cadastrar</a></button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </main>
+<script>
+
+//======== Funções ========
+//Pega valores
+let nome = document.querySelector("#nome")
+let cpf = document.querySelector("#cpf")
+let end = document.querySelector("#end")
+let dt_nasc = document.querySelector("#date")
+let rend_men = document.querySelector("#rend_mensal")
+let p = document.querySelector("#prof")
+
+//Cadastro nome 
+function cad_nome(){
+    let x = nome.value
+    if(x.length > 100){
+        alert("Nome inválido. Digite novamente abreviado")
+        document.getElementById("nome").value = ""
+        document.getElementById("nome").value = newVal
+    }
+}
+//Cadastro CPF
+function cad_cpf(){
+    let x = cpf.value 
+    let soma
+    const multi = []
+    
+    if(x.length < 11 || x.length > 11){
+        alert("CPF digitado inválido, digite novamente!")
+        document.getElementById("cpf").value = ""
+        document.getElementById("cpf").value = newVal
+    }
+}
+//Cadastro endereço
+function cad_end(){
+    let x = end.value
+    if(x.length > 100){
+        alert("Endereço inválido. Digite novamente abreviado")
+        document.getElementById("end").value = ""
+        document.getElementById("end").value = newVal
+    }
+}
+//Cadastro data de nascimento
+function cad_dataNasc(){
+    let x = new Date()
+    let d_nasc = new Date(dt_nasc.value)
+ //Pega a Idade 
+    let id = x.getFullYear() - d_nasc.getFullYear()
+//Compara se o mês de nascimento ja passou maior que > 0 não passou e menor que < 0 ja passou
+    let m = x.getMonth() - d_nasc.getMonth()
+    if(dt_nasc.value != ""){
+        if(m < 1 || (m == 0 && x.getdate() < d_nasc.getdate())){
+            id--
+            alert("Usuário possui " + id + " anos e ainda não fez aniversário esse ano") 
+        }else{
+            alert("Usuário possui " + id + " anos")
+        }
+    }
+}
+//Cadastro renda mensal
+function cad_renda(){
+    let x = rend_men.value
+    if(rend_men.value != ""){
+        if(x > 2548){
+        alert("O Salário esta acima da renda média brasileira!")
+        }else {
+            alert("O Salário esta abaixo da renda média brasileira!")
+        }
+    }   
+}
+//Alocação dos dados no vetor 
+function vetor_dados(){
+    let info = []
+
+    info.push(nome.value)
+    info.push(cpf.value)
+    info.push(end.value)
+    info.push(dt_nasc.value)
+    info.push(rend_men.value)
+    info.push(p.value)
+
+    console.log(info)
+}
+</script>
+</body>
+</html>
